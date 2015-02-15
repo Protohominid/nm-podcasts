@@ -61,7 +61,6 @@ function nm_podcasts_cpt() {
 
 
 
-
 // Add Podcast Categories
 //--------------------------------------------------------------------------------------------
 /*
@@ -88,8 +87,6 @@ function nm_podcast_taxonomies(){
 	register_taxonomy( 'nm-podcasts', 'nm_podcasts', $args );
 }
 */
-
-
 
 
 
@@ -146,7 +143,6 @@ function yoast_is_toast(){
 
 
 
-
 // Add the custom feed
 //--------------------------------------------------------------------------------------------
 add_action( 'init', 'nm_podcast_rss' );
@@ -157,7 +153,6 @@ function nm_podcast_rss(){
 function nm_podcast_rss_template(){
 	require_once( dirname( __FILE__ ) . '/nm-podcasts-rss-template.php' );
 }
-
 
 
 
@@ -178,7 +173,6 @@ function nm_podcast_module($atts, $content = null) {
 	return $output;
 }
 add_shortcode("podcast", "nm_podcast_module");
-
 
 
 
@@ -206,3 +200,24 @@ function nm_podcasts_filter_content( $content ) {
 	return $content;
 }
 add_filter( 'the_content', 'nm_podcasts_filter_content' );
+
+
+
+
+// Add 'settings' link to plugin page
+//--------------------------------------------------------------------------------------------
+add_filter( 'plugin_action_links', 'nm_podcasts_plugin_action_links', 10, 2 );
+function nm_podcasts_plugin_action_links( $links, $file ) {
+    static $this_plugin;
+
+    if (!$this_plugin) {
+        $this_plugin = plugin_basename(__FILE__);
+    }
+
+    if ($file == $this_plugin) {
+        $settings_link = '<a href="' . get_bloginfo('wpurl') . '/wp-admin/admin.php?page=nm-podcasts-admin">Settings</a>';
+        array_unshift($links, $settings_link);
+    }
+
+    return $links;
+}
