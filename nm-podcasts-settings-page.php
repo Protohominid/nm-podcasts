@@ -48,6 +48,13 @@ class NMPodcastsSettingsPage
 	{
 		// Set class property
 		$this->options = get_option( 'nm_podcasts_options' );
+
+		// Add admin messages
+		if( isset( $_GET['settings-updated'] ) ) {
+			echo '<div id="message" class="';
+			echo $_GET['settings-updated'] == 'false' ? 'error"><p><strong>There was an error. The settings were not saved.' : 'updated"><p><strong>Settings saved.';
+			echo '</strong></p></div>';
+		}
 		?>
 		<div class="wrap">
 			<?php screen_icon(); ?>
@@ -69,11 +76,6 @@ class NMPodcastsSettingsPage
 	 */
 	public function page_init()
 	{		
-		if( isset( $_GET['settings-updated'] ) ) {
-			echo '<div id="message" class="';
-			echo $_GET['settings-updated'] == 'false' ? 'error"><p><strong>There was an error. The settings were not saved.' : 'updated"><p><strong>Settings saved.';
-			echo '</strong></p></div>';
-		}
 		
 		register_setting(
 			'nm_podcasts_option_group', // Option group
