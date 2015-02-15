@@ -68,7 +68,13 @@ class NMPodcastsSettingsPage
 	 * Register and add settings
 	 */
 	public function page_init()
-	{		 
+	{		
+		if( isset( $_GET['settings-updated'] ) ) {
+			echo '<div id="message" class="';
+			echo $_GET['settings-updated'] == 'false' ? 'error"><p><strong>There was an error. The settings were not saved.' : 'updated"><p><strong>Settings saved.';
+			echo '</strong></p></div>';
+		}
+		
 		register_setting(
 			'nm_podcasts_option_group', // Option group
 			'nm_podcasts_options', // Option name
