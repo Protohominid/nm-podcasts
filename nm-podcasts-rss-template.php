@@ -42,7 +42,7 @@ echo '<?xml version="1.0" encoding="'.get_option('blog_charset').'"?'.'>';
     <?php // Start the loop for Podcast posts
     while ( $loop->have_posts() ) : $loop->the_post(); $pid = get_the_id(); ?>
     <item>
-      <title><?php the_title(); ?></title>
+      <title><?php echo html_entity_decode( get_the_title() ); ?></title>
       <itunes:author><?php echo get_bloginfo('name'); ?></itunes:author>
       <itunes:summary><?php echo get_the_excerpt(); ?></itunes:summary>
       

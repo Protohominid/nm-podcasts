@@ -44,6 +44,25 @@ class Select_NMPodcast_Metabox {
     global $wp_post_types;
     $save_hierarchical = $wp_post_types[$this->SELECT_POST_TYPE]->hierarchical;
     $wp_post_types[$this->SELECT_POST_TYPE]->hierarchical = true;
+    
+    // new select menu to allow showing draft posts
+    $args = array(
+	    'post_type' => $this->SELECT_POST_TYPE,
+	    'nopaging'  => true
+	);
+	$podcasts = new WP_Query( $args );
+	echo '<select name="' . $this->field_name . '" id="' . $this->field_id . '">';
+	while ( $podcasts->have_posts() ) : $podcasts->the_post();
+		echo '<option class="level-0" value="' . get_the_id() . '"';
+		echo ( $selected_post_id == get_the_id() ) ? 'selected="selected">' : '>';
+		the_title();
+		echo '</option>';
+	endwhile;
+	wp_reset_query();
+	echo '</select>';
+
+/*
+	// original select menu. doesn't allow showing of draft posts, though...
     wp_dropdown_pages( array(
       'id' => $this->field_id,
       'name' => $this->field_name,
@@ -51,6 +70,8 @@ class Select_NMPodcast_Metabox {
       'post_type' => $this->SELECT_POST_TYPE,
       'show_option_none' => $this->field_label,
     ));
+*/
+    
     $wp_post_types[$this->SELECT_POST_TYPE]->hierarchical = $save_hierarchical;
   }
   function save_post( $post_id, $post ) {
