@@ -191,8 +191,8 @@ function nm_podcasts_filter_content( $content ) {
 		$output = '<div class="podcast-wrap clearfix">
 		<h3>' . __( 'Download the free podcast:' ) . '</h3>
 		<ul class="podcast" style="text-align: left;">
-			<li class="mp3"><a href="' . $pod_url . '">mp3 Download</a></li>
-			<li class="itunes"><a href="' . $podcasts_options['itunes_subscribe_url'] . '">Subscribe via iTunes</a></li>
+			<li class="mp3"><a href="' . esc_url( $pod_url ) . '">mp3 Download</a></li>
+			<li class="itunes"><a href="' . esc_url( $podcasts_options['itunes_subscribe_url'] ) . '">Subscribe via iTunes</a></li>
 		</ul>
 		</div>';
 

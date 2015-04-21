@@ -25,7 +25,7 @@ echo '<?xml version="1.0" encoding="'.get_option('blog_charset').'"?'.'>';
     <copyright><?php echo date('Y'); ?> <?php echo get_bloginfo('name'); ?></copyright>
     
     <itunes:author><?php echo esc_attr( get_bloginfo('name') ); ?></itunes:author>
-    <itunes:summary><?php echo $podcasts_options['podcast_summary']; ?></itunes:summary>
+    <itunes:summary><?php echo esc_attr( $podcasts_options['podcast_summary'] ); ?></itunes:summary>
     <description><?php echo get_bloginfo('url'); ?></description>
     
     <itunes:owner>
@@ -33,7 +33,7 @@ echo '<?xml version="1.0" encoding="'.get_option('blog_charset').'"?'.'>';
       <itunes:email><?php echo get_bloginfo('admin_email'); ?></itunes:email>
     </itunes:owner>
     
-    <itunes:image href="<?php echo $podcasts_options['cover_art_url']; ?>" />
+    <itunes:image href="<?php echo esc_url( $podcasts_options['cover_art_url'] ); ?>" />
     
     <itunes:category text="<?php echo esc_attr( $podcasts_options['podcast_category'] ); ?>">
       <itunes:category text="<?php echo esc_attr( $podcasts_options['podcast_subcategory'] ); ?>"/>
@@ -47,7 +47,7 @@ echo '<?xml version="1.0" encoding="'.get_option('blog_charset').'"?'.'>';
       <itunes:summary><?php echo get_the_excerpt(); ?></itunes:summary>
       
       <?php $file_url = get_post_meta( $pid, 'nm_podcast_file_url', true ); ?>
-      <enclosure url="<?php echo $file_url; ?>" length="<?php echo get_post_meta( $pid, 'nm_podcast_file_size', true ); ?>" type="audio/mpeg" />
+      <enclosure url="<?php echo esc_url( $file_url ); ?>" length="<?php echo get_post_meta( $pid, 'nm_podcast_file_size', true ); ?>" type="audio/mpeg" />
       <guid><?php echo $file_url; ?></guid>
       <pubDate><?php the_time( 'D, d M Y H:i:s T') ?></pubDate>
       <itunes:duration><?php echo get_post_meta( $pid, 'nm_podcast_file_length', true ); ?></itunes:duration>
