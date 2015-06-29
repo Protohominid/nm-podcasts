@@ -52,6 +52,7 @@ class Select_NMPodcast_Metabox {
 	);
 	$podcasts = new WP_Query( $args );
 	echo '<select name="' . $this->field_name . '" id="' . $this->field_id . '">';
+	echo '<option class="level-0" value="">';	
 	while ( $podcasts->have_posts() ) : $podcasts->the_post();
 		echo '<option class="level-0" value="' . get_the_id() . '"';
 		echo ( $selected_post_id == get_the_id() ) ? 'selected="selected">' : '>';
