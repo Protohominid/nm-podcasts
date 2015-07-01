@@ -1,3 +1,5 @@
+~Current Version:0.6~
+
 # nm-podcasts
 A simple podcast plugin for WordPress
 
