@@ -15,10 +15,13 @@ header('Content-Type: '.feed_content_type('rss-http').'; charset='.get_option('b
 echo '<?xml version="1.0" encoding="'.get_option('blog_charset').'"?'.'>';
 ?>
 <?php // Start the iTunes RSS Feed: https://www.apple.com/itunes/podcasts/specs.html ?>
-<rss xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" version="2.0">
+<rss version="2.0"
+	xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+>
 
   <channel>
-	
+	<atom:link href="<?php echo get_bloginfo('url'); ?>/feed/podcast" rel="self" type="application/rss+xml" />
     <title><?php echo !empty( $podcasts_options['podcast_title'] ) ? esc_attr( $podcasts_options['podcast_title'] ) : get_bloginfo('name') . ' Podcast'; ?></title>
     <link><?php echo get_bloginfo('url'); ?></link>
     <language><?php echo get_bloginfo ( 'language' ); ?></language>
