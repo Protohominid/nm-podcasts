@@ -3,7 +3,7 @@
 Plugin Name: NM Podcasts
 Description: A simple plugin to add a custom post type and RSS feed for podcasts
 Author: Shawn Beelman
-Version: 0.5
+Version: 0.6
 Author URI: http://www.sbgraphicdesign.com
 based on http://css-tricks.com/roll-simple-wordpress-podcast-plugin/
 **/
