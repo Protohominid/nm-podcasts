@@ -3,12 +3,12 @@
 Plugin Name: NM Podcasts
 Description: A simple plugin to add a custom post type and RSS feed for podcasts
 Author: Shawn Beelman
-Version: 0.6.2
+Version: 0.6.3
 Author URI: http://www.sbgraphicdesign.com
+Plugin URI: https://github.com/Protohominid/nm-podcasts
+GitHub Plugin URI: https://github.com/Protohominid/nm-podcasts
 based on http://css-tricks.com/roll-simple-wordpress-podcast-plugin/
 **/
-
-$textdomain = 'nmpodcasts';
 
 require_once( 'nm-podcasts-settings-page.php' );
 require_once( 'nm-podcasts-select-metabox.php' );
@@ -36,25 +36,25 @@ if ( is_admin() ) {
 add_action( 'init', 'nm_podcasts_cpt' );
 function nm_podcasts_cpt() {
 
-	global $textdomain;
+	global 'nmpodcasts';
 	$labels = array(
-		'name'                => __( 'NM Podcasts', $textdomain ),
-		'singular_name'       => __( 'NM Podcast', $textdomain ),
-		'menu_name'           => __( 'NM Podcasts', $textdomain ),
-		'parent_item_colon'   => __( 'Parent Podcast:', $textdomain ),
-		'all_items'           => __( 'All NM Podcasts', $textdomain ),
-		'view_item'           => __( 'View NM Podcast', $textdomain ),
-		'add_new_item'        => __( 'Add New NM Podcast', $textdomain ),
-		'add_new'             => __( 'Add New', $textdomain ),
-		'edit_item'           => __( 'Edit NM Podcast', $textdomain ),
-		'update_item'         => __( 'Update NM Podcast', $textdomain ),
-		'search_items'        => __( 'Search NM Podcasts', $textdomain ),
-		'not_found'           => __( 'Not found', $textdomain ),
-		'not_found_in_trash'  => __( 'Not found in Trash', $textdomain ),
+		'name'                => __( 'NM Podcasts', 'nmpodcasts' ),
+		'singular_name'       => __( 'NM Podcast', 'nmpodcasts' ),
+		'menu_name'           => __( 'NM Podcasts', 'nmpodcasts' ),
+		'parent_item_colon'   => __( 'Parent Podcast:', 'nmpodcasts' ),
+		'all_items'           => __( 'All NM Podcasts', 'nmpodcasts' ),
+		'view_item'           => __( 'View NM Podcast', 'nmpodcasts' ),
+		'add_new_item'        => __( 'Add New NM Podcast', 'nmpodcasts' ),
+		'add_new'             => __( 'Add New', 'nmpodcasts' ),
+		'edit_item'           => __( 'Edit NM Podcast', 'nmpodcasts' ),
+		'update_item'         => __( 'Update NM Podcast', 'nmpodcasts' ),
+		'search_items'        => __( 'Search NM Podcasts', 'nmpodcasts' ),
+		'not_found'           => __( 'Not found', 'nmpodcasts' ),
+		'not_found_in_trash'  => __( 'Not found in Trash', 'nmpodcasts' ),
 	);
 	$args = array(
-		'label'               => __( 'nm_podcasts', $textdomain ),
-		'description'         => __( 'NM Podcast Description', $textdomain ),
+		'label'               => __( 'nm_podcasts', 'nmpodcasts' ),
+		'description'         => __( 'NM Podcast Description', 'nmpodcasts' ),
 		'labels'              => $labels,
 		'supports'            => array( 'title', 'excerpt' ),
 		#'taxonomies'          => array( 'category' ),
@@ -83,19 +83,19 @@ function nm_podcasts_cpt() {
 /*
 add_action( 'init', 'nm_podcast_taxonomies', 0 );
 function nm_podcast_taxonomies(){
-	global $textdomain;
+	global 'nmpodcasts';
 	$labels = array(
-		'name'              => _x( 'NM Podcast Categories', 'taxonomy general name', $textdomain ),
-		'singular_name'     => _x( 'NM Podcast Category', 'taxonomy singular name', $textdomain ),
-		'search_items'      => __( 'Search Podcast Categories', $textdomain ),
-		'all_items'         => __( 'All Podcast Categories', $textdomain ),
-		'parent_item'       => __( 'Parent Podcast Category', $textdomain ),
-		'parent_item_colon' => __( 'Parent Podcast Category:', $textdomain ),
-		'edit_item'         => __( 'Edit Podcast Category', $textdomain ), 
-		'update_item'       => __( 'Update Podcast Category', $textdomain ),
-		'add_new_item'      => __( 'Add New Podcast Category', $textdomain ),
-		'new_item_name'     => __( 'New Podcast Category', $textdomain ),
-		'menu_name'         => __( 'Podcast Categories', $textdomain )
+		'name'              => _x( 'NM Podcast Categories', 'taxonomy general name', 'nmpodcasts' ),
+		'singular_name'     => _x( 'NM Podcast Category', 'taxonomy singular name', 'nmpodcasts' ),
+		'search_items'      => __( 'Search Podcast Categories', 'nmpodcasts' ),
+		'all_items'         => __( 'All Podcast Categories', 'nmpodcasts' ),
+		'parent_item'       => __( 'Parent Podcast Category', 'nmpodcasts' ),
+		'parent_item_colon' => __( 'Parent Podcast Category:', 'nmpodcasts' ),
+		'edit_item'         => __( 'Edit Podcast Category', 'nmpodcasts' ), 
+		'update_item'       => __( 'Update Podcast Category', 'nmpodcasts' ),
+		'add_new_item'      => __( 'Add New Podcast Category', 'nmpodcasts' ),
+		'new_item_name'     => __( 'New Podcast Category', 'nmpodcasts' ),
+		'menu_name'         => __( 'Podcast Categories', 'nmpodcasts' )
 	);
 	$args = array(
 		'hierarchical' => true,
@@ -119,31 +119,31 @@ function nm_podcast_init_cmb_meta_boxes() {
 // Meta Boxes
 add_filter( 'cmb_meta_boxes', 'nm_podcast_metaboxes' );
 function nm_podcast_metaboxes( $meta_boxes ) {
-	global $textdomain;
+	global 'nmpodcasts';
 	$prefix = 'nm_podcast_'; // Prefix for all fields
 	$meta_boxes[] = array(
 		'id' => 'nm_podcast_metabox',
-		'title' => __( 'Podcast Details', $textdomain ),
+		'title' => __( 'Podcast Details', 'nmpodcasts' ),
 		'pages' => array( 'nm_podcasts' ), // post type
 		'context' => 'normal',
 		'priority' => 'high',
 		'show_names' => true, // Show field names on the left
 		'fields' => array(
 			array(
-				'name' => __( 'File URL', $textdomain ),
-				'desc' => __( 'Direct link to file. Should be mp3 format and http protocol (not https).', $textdomain ),
+				'name' => __( 'File URL', 'nmpodcasts' ),
+				'desc' => __( 'Direct link to file. Should be mp3 format and http protocol (not https).', 'nmpodcasts' ),
 				'id' => $prefix . 'file_url',
 				'type' => 'text_url'
 			),
 			array(
-				'name' => __( 'Duration', $textdomain ),
-				'desc' => __( 'HH:MM:SS', $textdomain ),
+				'name' => __( 'Duration', 'nmpodcasts' ),
+				'desc' => __( 'HH:MM:SS', 'nmpodcasts' ),
 				'id' => $prefix . 'file_length',
 				'type' => 'text'
 			),
 			array(
-				'name' => __( 'File Size', $textdomain ),
-				'desc' => __( 'In bytes', $textdomain ),
+				'name' => __( 'File Size', 'nmpodcasts' ),
+				'desc' => __( 'In bytes', 'nmpodcasts' ),
 				'id' => $prefix . 'file_size',
 				'type' => 'text'
 			)
