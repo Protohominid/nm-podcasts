@@ -36,7 +36,6 @@ if ( is_admin() ) {
 add_action( 'init', 'nm_podcasts_cpt' );
 function nm_podcasts_cpt() {
 
-	global 'nmpodcasts';
 	$labels = array(
 		'name'                => __( 'NM Podcasts', 'nmpodcasts' ),
 		'singular_name'       => __( 'NM Podcast', 'nmpodcasts' ),
@@ -119,7 +118,6 @@ function nm_podcast_init_cmb_meta_boxes() {
 // Meta Boxes
 add_filter( 'cmb_meta_boxes', 'nm_podcast_metaboxes' );
 function nm_podcast_metaboxes( $meta_boxes ) {
-	global 'nmpodcasts';
 	$prefix = 'nm_podcast_'; // Prefix for all fields
 	$meta_boxes[] = array(
 		'id' => 'nm_podcast_metabox',
