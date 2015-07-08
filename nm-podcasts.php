@@ -172,26 +172,6 @@ function nm_podcast_rss_template(){
 
 
 
-// Add the shortcode (deprecated)
-//--------------------------------------------------------------------------------------------
-#add_shortcode("podcast", "nm_podcast_module");
-function nm_podcast_module( $atts, $content = null ) {
-	extract( shortcode_atts( array(
-		"archive_id" => ''
-		), $atts ) );
-	$output = '<div class="podcast-wrap clearfix">
-		<h3>' . __( 'Download the free podcast:' ) . '</h3>
-		<ul class="podcast" style="text-align: left;">
-			<li class="mp3"><a href="http://www.archive.org/download/'.$archive_id.'.mp3">mp3 Download</a></li>
-			<li class="itunes"><a href="http://itunes.apple.com/us/podcast/namely-marly/id403607622">Subscribe via iTunes</a></li>
-		</ul>
-	</div>';
-	return $output;
-}
-
-
-
-
 // Add the podcast feature box to post
 //--------------------------------------------------------------------------------------------
 add_filter( 'the_content', 'nm_podcasts_filter_content' );
