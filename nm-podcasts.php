@@ -3,7 +3,7 @@
 Plugin Name: NM Podcasts
 Description: A simple plugin to add a custom post type and RSS feed for podcasts
 Author: Shawn Beelman
-Version: 0.6.3
+Version: 0.6.4
 Author URI: http://www.sbgraphicdesign.com
 Plugin URI: https://github.com/Protohominid/nm-podcasts
 GitHub Plugin URI: https://github.com/Protohominid/nm-podcasts
@@ -150,9 +150,9 @@ function nm_podcast_metaboxes( $meta_boxes ) {
 	return $meta_boxes;
 }
 
-add_action('add_meta_boxes', 'yoast_is_toast', 99);
+add_action( 'add_meta_boxes', 'yoast_is_toast', 99 );
 function yoast_is_toast(){
-	remove_meta_box('wpseo_meta', 'nm_podcasts', 'normal');
+	remove_meta_box( 'wpseo_meta', 'nm_podcasts', 'normal' );
 }
 
 
@@ -175,10 +175,10 @@ function nm_podcast_rss_template(){
 // Add the shortcode (deprecated)
 //--------------------------------------------------------------------------------------------
 #add_shortcode("podcast", "nm_podcast_module");
-function nm_podcast_module($atts, $content = null) {
-	extract(shortcode_atts(array(
+function nm_podcast_module( $atts, $content = null ) {
+	extract( shortcode_atts( array(
 		"archive_id" => ''
-		), $atts));
+		), $atts ) );
 	$output = '<div class="podcast-wrap clearfix">
 		<h3>' . __( 'Download the free podcast:' ) . '</h3>
 		<ul class="podcast" style="text-align: left;">
@@ -203,7 +203,7 @@ function nm_podcasts_filter_content( $content ) {
 
 	if( is_single() && !empty( $nm_podcast ) ) {
 		$pod_url = get_post_meta( $nm_podcast, 'nm_podcast_file_url', true );
-		$output = '<div class="podcast-wrap clearfix">
+		$output = '<div class="podcast-wrap">
 		<h3>' . __( 'Download the free podcast:' ) . '</h3>
 		<ul class="podcast" style="text-align: left;">
 			<li class="mp3"><a href="' . esc_url( $pod_url ) . '">mp3 Download</a></li>
