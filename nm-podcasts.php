@@ -184,6 +184,7 @@ function nm_podcasts_filter_content( $content ) {
 	if( is_single() && !empty( $nm_podcast ) ) {
 		$pod_url = get_post_meta( $nm_podcast, 'nm_podcast_file_url', true );
 		$output = '<div class="podcast-wrap">
+		<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="podcast-icon" x="0px" y="0px" width="48px" height="48px" viewBox="0 0 48 48" enable-background="new 0 0 16 16" xml:space="preserve" fill="#ffffff"> <path d="M 36 44.763L36.00 42 c0.00-1.431-0.294-2.781-0.75-4.053 C 39.3 34.6  42 29.7  42 24.00c0.00-9.939-8.061-18.00-18.00-18.00S 6 14.1  6 24.00c0.00 5.7  2.7 10.7  6.8 13.947C 12.3 39.2  12 40.6  12 42.00l0.00 2.8 C 4.8 40.6 0 32.9 0 24.00c0.00-13.254  10.746-24.00  24.00-24.00s 24 10.7  24 24.00C 48 32.9  43.2 40.6  36 44.763z M 24 9.00c 8.3 0  15 6.7  15 15 c0.00 4.482-2.004 8.457-5.118 11.205c-1.164-1.686-2.763-3.027-4.614-3.936C 31.5 29.6  33 27  33 24.00c0.00-4.971-4.029-9.00-9.00-9.00 S 15 19  15 24.00c0.00 3  1.5 5.6  3.7 7.269c-1.851 0.912-3.45 2.25-4.614 3.936C 11 32.5  9 28.5  9 24.00C 9 15.7  15.7 9  24 9.00z M 18 24.00c0.00-3.312  2.688-6.00  6.00-6.00s 6 2.7  6 6.00s-2.688 6.00-6.00 6.00S 18 27.3  18 24.00z M 24 33.00c 5 0  9 4  9 9.00l0.00 6 L15.00 48 l0.00 -6 C 15 37  19 33  24 33.00z"/></svg>
 		<h3>' . __( 'Download the free podcast:' ) . '</h3>
 		<ul class="podcast" style="text-align: left;">
 			<li class="mp3"><a href="' . esc_url( $pod_url ) . '">mp3 Download</a></li>
