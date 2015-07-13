@@ -109,6 +109,14 @@ class NMPodcastsSettingsPage
 		);		
 
 		add_settings_field(
+			'stitcher_subscribe_url', // ID
+			'Stitcher Subscribe URL', // Title 
+			array( $this, 'stitcher_subscribe_url_callback' ), // Callback
+			'nm-podcasts-admin', // Page
+			'section_one' // Section			  
+		);		
+
+		add_settings_field(
 			'cover_art_url', // ID
 			'Cover Art URL', // Title 
 			array( $this, 'cover_art_url_callback' ), // Callback
@@ -157,6 +165,9 @@ class NMPodcastsSettingsPage
 		if( isset( $input['itunes_subscribe_url'] ) )
 			$new_input['itunes_subscribe_url'] = sanitize_text_field( $input['itunes_subscribe_url'] );
 
+		if( isset( $input['stitcher_subscribe_url'] ) )
+			$new_input['stitcher_subscribe_url'] = sanitize_text_field( $input['stitcher_subscribe_url'] );
+
 		if( isset( $input['cover_art_url'] ) )
 			$new_input['cover_art_url'] = sanitize_text_field( $input['cover_art_url'] );
 
@@ -195,6 +206,13 @@ class NMPodcastsSettingsPage
 		printf(
 			'<input type="text" id="itunes_subscribe_url" name="nm_podcasts_options[itunes_subscribe_url]" value="%s" style="width: 100%%;" />',
 			isset( $this->options['itunes_subscribe_url'] ) ? esc_attr( $this->options['itunes_subscribe_url']) : ''
+		);
+	}
+	public function stitcher_subscribe_url_callback()
+	{
+		printf(
+			'<input type="text" id="stitcher_subscribe_url" name="nm_podcasts_options[stitcher_subscribe_url]" value="%s" style="width: 100%%;" />',
+			isset( $this->options['stitcher_subscribe_url'] ) ? esc_attr( $this->options['stitcher_subscribe_url']) : ''
 		);
 	}
 	public function cover_art_url_callback()

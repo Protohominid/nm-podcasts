@@ -187,10 +187,16 @@ function nm_podcasts_filter_content( $content ) {
 		<h3>' . __( 'Download the free podcast:' ) . '</h3>
 		<ul class="podcast" style="text-align: left;">
 			<li class="mp3"><a href="' . esc_url( $pod_url ) . '">mp3 Download</a></li>
-			<li class="itunes"><a href="' . esc_url( $podcasts_options['itunes_subscribe_url'] ) . '">Subscribe via iTunes</a></li>
-		</ul>
+			<li class="itunes"><a href="' . esc_url( $podcasts_options['itunes_subscribe_url'] ) . '">Subscribe via iTunes</a></li>';
+
+		if( !empty( $podcasts_options['stitcher_subscribe_url'] ) ) {
+			$output .= '<li class="stitcher"><a href="' . esc_url( $podcasts_options['stitcher_subscribe_url'] ) . '">Subscribe via Stitcher</a></li>';
+		}
+		
+		$output .= '</ul>
 		</div>';
 
+		// Prepend markup to wp content
 		$content = $output . $content;	
 	}	
 	return $content;
