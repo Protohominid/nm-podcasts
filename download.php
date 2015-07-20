@@ -40,7 +40,7 @@ if( isset( $_GET['url'] ) ) {
 	 * Make sure to replace the domain names below with your own domain name,
 	 * and the file type ('mp3') with the type you want to track.
 	 */
-	if( strstr( $file_url, $file_hosted_at ) && strstr( $file_url, 'mp3' ) ) {
+	if( strstr( $file_url, $files_hosted_at ) && strstr( $file_url, 'mp3' ) ) {
 		$file_url = preg_replace( '/https?:\/\/(www\.)?'.$site_domain.'/', '', $file_url );
 		$filename = basename( $file_url );
 		
