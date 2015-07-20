@@ -144,6 +144,14 @@ class NMPodcastsSettingsPage {
 		);
 
 		add_settings_field(
+			'nm_podcast_files_domain', 
+			'Domain where files will be hosted', 
+			array( $this, 'podcast_files_domain_callback' ), 
+			'nm-podcasts-admin', 
+			'section_one'
+		);
+
+		add_settings_field(
 			'google_analytics_tracking', 
 			'Google Analytics Account', 
 			array( $this, 'google_analytics_tracking_callback' ), 
@@ -181,6 +189,9 @@ class NMPodcastsSettingsPage {
 
 		if( isset( $input['podcast_subcategory'] ) )
 			$new_input['podcast_subcategory'] = sanitize_text_field( $input['podcast_subcategory'] );
+
+		if( isset( $input['nm_podcast_files_domain'] ) )
+			$new_input['nm_podcast_files_domain'] = sanitize_text_field( $input['nm_podcast_files_domain'] );
 
 		if( isset( $input['google_analytics_tracking'] ) )
 			$new_input['google_analytics_tracking'] = sanitize_text_field( $input['google_analytics_tracking'] );
@@ -238,6 +249,12 @@ class NMPodcastsSettingsPage {
 		printf(
 			'<input type="text" id="podcast_subcategory" name="nm_podcasts_options[podcast_subcategory]" value="%s" /><br><em>Secondary category. See list at link above.</em>',
 			isset( $this->options['podcast_subcategory'] ) ? esc_attr( $this->options['podcast_subcategory']) : ''
+		);
+	}
+	public function podcast_files_domain_callback() {
+		printf(
+			'<input type="text" id="nm_podcast_files_domain" name="nm_podcasts_options[nm_podcast_files_domain]" value="%s" /><br><em>External domain where files are hosted (format: "archive.org") Leave blank if files are hosted on this site.</em>',
+			isset( $this->options['nm_podcast_files_domain'] ) ? esc_attr( $this->options['nm_podcast_files_domain']) : ''
 		);
 	}
 	public function google_analytics_tracking_callback() {

@@ -3,7 +3,7 @@
 Plugin Name: NM Podcasts
 Description: A simple plugin to add a custom post type and RSS feed for podcasts
 Author: Shawn Beelman
-Version: 0.7.2
+Version: 0.7.3
 Author URI: http://www.sbgraphicdesign.com
 Plugin URI: https://github.com/Protohominid/nm-podcasts
 GitHub Plugin URI: https://github.com/Protohominid/nm-podcasts
@@ -165,7 +165,7 @@ function nm_podcasts_filter_content( $content ) {
 	$nm_podcast = get_post_meta( $post->ID, '_selected_nm_podcasts', true );
 
 	if( is_single() && !empty( $nm_podcast ) ) {
-		$pod_url = get_bloginfo('url') . '/download/?url=' . get_post_meta( $nm_podcast, 'nm_podcast_file_url', true );
+		$pod_url = get_bloginfo('url') . '/podcast-download/?url=' . get_post_meta( $nm_podcast, 'nm_podcast_file_url', true );
 		$output = '<div class="podcast-wrap">
 		<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="podcast-icon" x="0px" y="0px" width="48px" height="48px" viewBox="0 0 48 48" enable-background="new 0 0 16 16" xml:space="preserve" fill="#ffffff"> <path d="M 36 44.763L36.00 42 c0.00-1.431-0.294-2.781-0.75-4.053 C 39.3 34.6  42 29.7  42 24.00c0.00-9.939-8.061-18.00-18.00-18.00S 6 14.1  6 24.00c0.00 5.7  2.7 10.7  6.8 13.947C 12.3 39.2  12 40.6  12 42.00l0.00 2.8 C 4.8 40.6 0 32.9 0 24.00c0.00-13.254  10.746-24.00  24.00-24.00s 24 10.7  24 24.00C 48 32.9  43.2 40.6  36 44.763z M 24 9.00c 8.3 0  15 6.7  15 15 c0.00 4.482-2.004 8.457-5.118 11.205c-1.164-1.686-2.763-3.027-4.614-3.936C 31.5 29.6  33 27  33 24.00c0.00-4.971-4.029-9.00-9.00-9.00 S 15 19  15 24.00c0.00 3  1.5 5.6  3.7 7.269c-1.851 0.912-3.45 2.25-4.614 3.936C 11 32.5  9 28.5  9 24.00C 9 15.7  15.7 9  24 9.00z M 18 24.00c0.00-3.312  2.688-6.00  6.00-6.00s 6 2.7  6 6.00s-2.688 6.00-6.00 6.00S 18 27.3  18 24.00z M 24 33.00c 5 0  9 4  9 9.00l0.00 6 L15.00 48 l0.00 -6 C 15 37  19 33  24 33.00z"/></svg>
 		<h3>' . __( 'Download the free podcast:' ) . '</h3>
@@ -207,55 +207,35 @@ function nm_podcasts_plugin_action_links( $links, $file ) {
 }
 
 
-//Template fallback
+
+//Template override
 add_filter( 'template_include', 'nmp_download_template', 99 );
 
 function nmp_download_template( $template ) {
-	$plugindir = dirname( __FILE__ );
-	$new_template = $plugindir . '/download.php';
+	$new_template = dirname( __FILE__ ) . '/download.php';
+	global $wp_query;
 	
-	if ( is_page( 'podcast-download' )  ) {
-		return $new_template ;
+	if ( 'podcast-download' == get_query_var( 'pagename' ) ) {
+		return $new_template;
 	} else {
 		return $template;
 	}
-	
-/*
-	global $wp;
-	if ( isset( $wp->query_vars["pagename"] ) && $wp->query_vars["pagename"] == 'download' ) {
-
-		$return_template = $plugindir . '/download.php';
-
-		include( $return_template );
-	}
-*/
 }
 
-/*
-function do_theme_redirect( $url ) {
-	global $post, $wp_query;
-	if ( have_posts() ) {
-		include( $url );
-		die();
-	} else {
-		$wp_query->is_404 = true;
-	}
-}
-*/
 
 // Create custom page at plugin activation
-#register_activation_hook( __FILE__, 'nm_podcasts_plugin_activated' );
+register_activation_hook( __FILE__, 'nm_podcasts_plugin_activated' );
 function nm_podcasts_plugin_activated() {
 	// creates the "download" page needed for tracking
 	// Check that the page doesn't exist already
-	$query = new WP_Query( 'pagename=download' );
+	$query = new WP_Query( 'pagename=podcast-download' );
 	// To do: show admin message if page already exists
 	if ( ! $query->have_posts() ) {
 		wp_insert_post(
 			array(
-			'post_content'   => '[nm-podcasts-download]',
-			'post_name'      => 'download',
-			'post_title'     => 'Download',
+			'post_content'   => 'Blank page for NM Podcast plugin downloads tracking - Do not delete',
+			'post_name'      => 'podcast-download',
+			'post_title'     => 'Podcast Downloads Tracker',
 			'post_status'    => 'publish',
 			'post_type'      => 'page',
 			'ping_status'    => 'closed',

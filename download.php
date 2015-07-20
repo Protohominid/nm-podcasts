@@ -7,6 +7,7 @@
  * Released under the terms of the MIT License.
  * Find the license here: http://opensource.org/licenses/MIT
  * or consult the included README file.
+ * modified 2015-07-20 by SB
  */
 
 /**
@@ -19,10 +20,10 @@
 require_once( dirname(__FILE__).'/ss-ga.class.php' );
 
 // added by me:
-$file_hosted_at = 'archive.org';
 $site_domain = $_SERVER['SERVER_NAME'];
 global $options;
 $podcasts_options = get_option( 'nm_podcasts_options' );
+$files_hosted_at = !empty( $podcasts_options['nm_podcast_files_domain'] ) ? $podcasts_options['nm_podcast_files_domain'] : $site_domain;
 
 /**
  * Step 2:
@@ -31,29 +32,28 @@ $podcasts_options = get_option( 'nm_podcasts_options' );
 $ssga = new ssga( $podcasts_options['google_analytics_tracking'], $site_domain );
 
 if( isset( $_GET['url'] ) ) {
-	$domain = $_GET['url'];
-	$domain = urldecode( $domain );
-	$domain = filter_var( $domain, FILTER_SANITIZE_URL );
-
+	$file_url = $_GET['url'];
+	$file_url = urldecode( $file_url );
+	$file_url = filter_var( $file_url, FILTER_SANITIZE_URL );
 	/**
 	 * Step 3:
 	 * Make sure to replace the domain names below with your own domain name,
 	 * and the file type ('mp3') with the type you want to track.
 	 */
-	if( strstr( $domain, $file_hosted_at ) && strstr( $domain, 'mp3' ) ) {
-		$domain   = preg_replace( '/https?:\/\/(www\.)?'.$site_domain.'/', '', $domain );
-		$filename = basename( $domain );
+	if( strstr( $file_url, $file_hosted_at ) && strstr( $file_url, 'mp3' ) ) {
+		$file_url = preg_replace( '/https?:\/\/(www\.)?'.$site_domain.'/', '', $file_url );
+		$filename = basename( $file_url );
 		
 		/**
 		 * Step 4:
 		 * Replace the below line with your Event parameters.
 		 */
-		$ssga->set_event( 'Downloads', 'Download Type', $filename );
+		$ssga->set_event( 'Podcast Downloads', 'Download Type', $filename );
 
 		$ssga->send();
 		$ssga->reset();
 
-		header( 'Location: ' . $domain );
+		header( 'Location: ' . $file_url );
 	}
 	else {
 		trigger_error( 'Sorry, this file is invalid.' );
