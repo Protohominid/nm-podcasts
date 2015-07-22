@@ -46,7 +46,7 @@ echo '<?xml version="1.0" encoding="'.get_option( 'blog_charset' ).'"?'.'>';
       <itunes:author><?php echo get_bloginfo( 'name' ); ?></itunes:author>
       <itunes:summary><?php echo get_the_excerpt(); ?></itunes:summary>
       
-      <?php $file_url = get_bloginfo( 'url' ) . '/download/?url=' . get_post_meta( $pid, 'nm_podcast_file_url', true ); ?>
+      <?php $file_url = get_bloginfo( 'url' ) . '/podcast-download/?url=' . get_post_meta( $pid, 'nm_podcast_file_url', true ); ?>
       <enclosure url="<?php echo esc_url( $file_url ); ?>" length="<?php echo get_post_meta( $pid, 'nm_podcast_file_size', true ); ?>" type="audio/mpeg" />
       <guid><?php echo $file_url; ?></guid>
       <pubDate><?php the_time( 'D, d M Y H:i:s T') ?></pubDate>
