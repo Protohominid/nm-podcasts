@@ -3,7 +3,7 @@
 Plugin Name: NM Podcasts
 Description: A simple plugin to add a custom post type and RSS feed for podcasts
 Author: Shawn Beelman
-Version: 0.8.0
+Version: 0.8.1
 Author URI: http://www.sbgraphicdesign.com
 Plugin URI: https://github.com/Protohominid/nm-podcasts
 GitHub Plugin URI: https://github.com/Protohominid/nm-podcasts
@@ -49,53 +49,20 @@ function nm_podcasts_cpt() {
 		'description'			=> __( 'NM Podcast Description', 'nmpodcasts' ),
 		'labels'				=> $labels,
 		'supports'				=> array( 'title', 'excerpt' ),
-		#'taxonomies'			=> array( 'category' ),
 		'hierarchical'			=> false,
-		'public'				=> true,
+		'public'				=> false,
 		'show_ui'				=> true,
-		#'show_in_menu'			=> true,
-		#'show_in_nav_menus'	=> true,
 		'show_in_admin_bar'		=> true,
 		#'menu_position'		=> 5,
 		'menu_icon'				=> 'dashicons-format-audio',
 		'can_export'			=> true,
 		'has_archive'			=> true,
-		#'exclude_from_search'	=> false,
-		#'publicly_queryable'	=> true,
+		'exclude_from_search'	=> true,
+		'publicly_queryable'	=> false,
 		#'capability_type'		=> 'page'
 	);
 	register_post_type( 'nm_podcasts', $args );
 }
-
-
-
-
-// Add Podcast Categories
-//--------------------------------------------------------------------------------------------
-/*
-add_action( 'init', 'nm_podcast_taxonomies', 0 );
-function nm_podcast_taxonomies(){
-	global 'nmpodcasts';
-	$labels = array(
-		'name'				=> _x( 'NM Podcast Categories', 'taxonomy general name', 'nmpodcasts' ),
-		'singular_name'		=> _x( 'NM Podcast Category', 'taxonomy singular name', 'nmpodcasts' ),
-		'search_items'		=> __( 'Search Podcast Categories', 'nmpodcasts' ),
-		'all_items'			=> __( 'All Podcast Categories', 'nmpodcasts' ),
-		'parent_item'		=> __( 'Parent Podcast Category', 'nmpodcasts' ),
-		'parent_item_colon'	=> __( 'Parent Podcast Category:', 'nmpodcasts' ),
-		'edit_item'			=> __( 'Edit Podcast Category', 'nmpodcasts' ), 
-		'update_item'		=> __( 'Update Podcast Category', 'nmpodcasts' ),
-		'add_new_item'		=> __( 'Add New Podcast Category', 'nmpodcasts' ),
-		'new_item_name'		=> __( 'New Podcast Category', 'nmpodcasts' ),
-		'menu_name'			=> __( 'Podcast Categories', 'nmpodcasts' )
-	);
-	$args = array(
-		'hierarchical' => true,
-		'labels' => $labels
-	);
-	register_taxonomy( 'nm-podcasts', 'nm_podcasts', $args );
-}
-*/
 
 
 
