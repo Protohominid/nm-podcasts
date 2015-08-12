@@ -3,12 +3,22 @@
 Plugin Name: NM Podcasts
 Description: A simple plugin to add a custom post type and RSS feed for podcasts
 Author: Shawn Beelman
-Version: 0.7.3
+Version: 0.8.0
 Author URI: http://www.sbgraphicdesign.com
 Plugin URI: https://github.com/Protohominid/nm-podcasts
 GitHub Plugin URI: https://github.com/Protohominid/nm-podcasts
 based on http://css-tricks.com/roll-simple-wordpress-podcast-plugin/
 **/
+
+include_once( plugin_dir_path( __FILE__ ) . 'updater.php' );
+$updater = new Smashing_Updater( __FILE__ );
+$updater->set_username( 'Protohominid' );
+$updater->set_repository( 'nm-podcasts' );
+/* 
+	$updater->authorize( 'abcdefghijk1234567890' ); // Your auth code goes here for private repos
+*/
+$updater->initialize();
+
 
 require_once( 'nm-podcasts-settings-page.php' );
 require_once( 'nm-podcasts-select-metabox.php' );
