@@ -26,7 +26,7 @@ echo '<?xml version="1.0" encoding="'.get_option( 'blog_charset' ).'"?'.'>';
     
     <itunes:author><?php echo esc_attr( get_bloginfo( 'name' ) ); ?></itunes:author>
     <itunes:summary><?php echo esc_attr( $podcasts_options['podcast_summary'] ); ?></itunes:summary>
-    <description><?php echo get_bloginfo( 'url' ); ?></description>
+    <description><?php echo esc_attr( $podcasts_options['podcast_summary'] ); ?></description>
     
     <itunes:owner>
       <itunes:name><?php echo esc_attr( get_bloginfo( 'name' ) ); ?></itunes:name>
