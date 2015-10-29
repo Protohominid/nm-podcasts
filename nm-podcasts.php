@@ -3,7 +3,7 @@
 Plugin Name: NM Podcasts
 Description: A simple plugin to add a custom post type and RSS feed for podcasts
 Author: Shawn Beelman
-Version: 0.8.3
+Version: 0.9.0
 Author URI: http://www.sbgraphicdesign.com
 Plugin URI: https://github.com/Protohominid/nm-podcasts
 GitHub Plugin URI: https://github.com/Protohominid/nm-podcasts
@@ -14,7 +14,7 @@ include_once( plugin_dir_path( __FILE__ ) . 'updater.php' );
 $updater = new Smashing_Updater( __FILE__ );
 $updater->set_username( 'Protohominid' );
 $updater->set_repository( 'nm-podcasts' );
-/* 
+/*
 	$updater->authorize( 'abcdefghijk1234567890' ); // Your auth code goes here for private repos
 */
 $updater->initialize();
@@ -153,13 +153,13 @@ function nm_podcasts_filter_content( $content ) {
 		if( !empty( $podcasts_options['stitcher_subscribe_url'] ) ) {
 			$output .= '<li class="stitcher"><a href="' . esc_url( $podcasts_options['stitcher_subscribe_url'] ) . '">Subscribe via Stitcher</a></li>';
 		}
-		
+
 		$output .= '</ul>
 		</div>';
 
 		// Prepend markup to wp content
-		$content = $output . $content;	
-	}	
+		$content = $output . $content;
+	}
 	return $content;
 }
 
@@ -191,7 +191,7 @@ add_filter( 'template_include', 'nmp_download_template', 99 );
 function nmp_download_template( $template ) {
 	$new_template = dirname( __FILE__ ) . '/download.php';
 	global $wp_query;
-	
+
 	if ( 'podcast-download' == get_query_var( 'pagename' ) ) {
 		return $new_template;
 	} else {
