@@ -11,7 +11,7 @@ $args = array( 'post_type' => 'nm_podcasts', 'posts_per_page' => 100 );
 $loop = new WP_Query( $args );
 
 // Output the XML header
-header( 'Content-Type: '.feed_content_type( 'rss-http' ).'; charset='.get_option( 'blog_charset' ), true );
+header( 'Content-Type: ' . feed_content_type( 'rss-http' ) . '; charset=' . get_option( 'blog_charset' ) . '; X-Robots-Tag: noindex', true );
 echo '<?xml version="1.0" encoding="'.get_option( 'blog_charset' ).'"?'.'>';
 ?>
 <?php // Start the iTunes RSS Feed: https://www.apple.com/itunes/podcasts/specs.html ?>
@@ -46,7 +46,6 @@ echo '<?xml version="1.0" encoding="'.get_option( 'blog_charset' ).'"?'.'>';
       <itunes:author><?php echo get_bloginfo( 'name' ); ?></itunes:author>
       <itunes:summary><?php echo get_the_excerpt(); ?></itunes:summary>
 
-      <?php #$file_url = get_bloginfo( 'url' ) . '/podcast-download/?url=' . get_post_meta( $pid, 'nm_podcast_file_url', true ); ?>
       <?php $file_url = get_post_meta( $pid, 'nm_podcast_file_url', true ); ?>
       <enclosure url="<?php echo esc_url( $file_url ); ?>" length="<?php echo get_post_meta( $pid, 'nm_podcast_file_size', true ); ?>" type="audio/mpeg" />
       <guid><?php echo $file_url; ?></guid>
